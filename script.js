@@ -1,5 +1,23 @@
-let buttons = document.querySelectorAll("button");
-buttons.forEach((button) => button.addEventListener("click", game));
+  let score = {
+    updatePlayer() {
+     playerScore.innerText++
+      
+    },
+    updateComp() {
+      computerScore.innerText++
+    },
+    checkForWinner(n) {
+      if (computerScore.innerText == n) return "Computer"
+      if (playerScore.innerText == n) return "Player"
+      return false
+    },
+    getWinner() {
+    comments.innerText = this.player > this.computer ? "You WIN!" : "Sorry you lost! :("
+    }
+
+  }
+let rpsButtons = document.querySelectorAll("#rpsButtons button");
+rpsButtons.forEach((button) => button.addEventListener("click", game));
 
 function computerPlay() {
   const choices = ["Rock", "Paper", "Scissors"];
@@ -19,31 +37,22 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-function endGame() {
-    buttons.forEach(button => button.disabled=true)
-    comments.innerText = "press any key to play again! or exit"
+function endGame(win) {
+    rpsButtons.forEach(button => button.disabled = true)
+    finalWinner.innerText = `${win} wins!!!`
+    endGameResults.hidden = false;
+    playAgainButton.addEventListener('click', resetGame)
+}
+
+function resetGame() {
+  playerScore.innerText = "0"
+  computerScore.innerText = "0"
+  comments.innerText = "Welcome! Pick your weapon!"
+  rpsButtons.forEach(button => button.disabled = false)
+  endGameResults.hidden = true;
 }
 
 function game() {
-  let score = {
-    player : parseInt(playerScore.innerText) + 1 ,
-    computer: parseInt(computerScore.innerText) + 1,
-
-    updatePlayer() {
-      playerScore.innerText++
-    },
-    updateComp() {
-      computerScore.innerText++
-    },
-    checkForWinner(n) {
-      return this.player == n || this.computer == n
-    },
-    getWinner() {
-    console.log(this.player > this.computer ? "You WIN!" : "Sorry you lost! ;(")
-    }
-  }
-
-
   let playerSelection = this.innerText;
   let computerSelection = computerPlay();
 
@@ -52,19 +61,15 @@ function game() {
   // use switch
 
   if (roundResult == "tie") {
-    console.log("TIE!!!");
+    comments.innerText = "TIE!!!";
   } else if (roundResult == "player") {
-    console.log(`You Win! ${playerSelection} beats ${computerSelection}!`);
+    comments.innerText = `You Win! ${playerSelection} beats ${computerSelection}!`
     score.updatePlayer()
-    
   } else {
-    console.log(`You Lose! ${computerSelection} beats ${playerSelection}!`);
+    comments.innerText = `You Lose! ${computerSelection} beats ${playerSelection}!`;
     score.updateComp()
   }  
 
-  if (score.checkForWinner(2)) {
-    score.getWinner()
-    endGame()
-  }
+if (score.checkForWinner(3)) endGame(score.checkForWinner(3))
 }
 
