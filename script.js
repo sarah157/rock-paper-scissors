@@ -18,9 +18,6 @@ function playRound(playerSelection, computerSelection) {
   return "computer";
 }
 
-function getFinalWinner(p1, p2) {
-  console.log(p1 > p2 ? "You WIN!" : "Sorry you lost! ;(");
-}
 
 function endGame() {
     buttons.forEach(button => button.disabled=true)
@@ -28,6 +25,25 @@ function endGame() {
 }
 
 function game() {
+  let score = {
+    player : parseInt(playerScore.innerText) + 1 ,
+    computer: parseInt(computerScore.innerText) + 1,
+
+    updatePlayer() {
+      playerScore.innerText++
+    },
+    updateComp() {
+      computerScore.innerText++
+    },
+    checkForWinner(n) {
+      return this.player == n || this.computer == n
+    },
+    getWinner() {
+    console.log(this.player > this.computer ? "You WIN!" : "Sorry you lost! ;(")
+    }
+  }
+
+
   let playerSelection = this.innerText;
   let computerSelection = computerPlay();
 
@@ -39,15 +55,16 @@ function game() {
     console.log("TIE!!!");
   } else if (roundResult == "player") {
     console.log(`You Win! ${playerSelection} beats ${computerSelection}!`);
-    playerScore.innerText++;
+    score.updatePlayer()
+    
   } else {
     console.log(`You Lose! ${computerSelection} beats ${playerSelection}!`);
-    computerScore.innerText++;
+    score.updateComp()
   }  
-  
-  if (playerScore.innerText == 2 || computerScore.innerText == 2) {
-      endGame()
-    getFinalWinner(playerScore.innerText, computerScore.innerText);
+
+  if (score.checkForWinner(2)) {
+    score.getWinner()
+    endGame()
+  }
 }
 
-  }
