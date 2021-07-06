@@ -7,9 +7,7 @@
       computerScore.innerText++
     },
     checkForWinner(n) {
-      if (computerScore.innerText == n) return "Computer"
-      if (playerScore.innerText == n) return "Player"
-      return false
+      return (computerScore.innerText == n) || (playerScore.innerText == n)
     },
     getWinner() {
     comments.innerText = this.player > this.computer ? "You WIN!" : "Sorry you lost! :("
@@ -37,10 +35,11 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-function endGame(win) {
+function endGame(winner) {
     rpsButtons.forEach(button => button.disabled = true)
-    finalWinner.innerText = `${win} wins!!!`
-    endGameResults.hidden = false;
+    finalWinnerMessage.innerText = (winner == "player") ? "You won!" : "Sorry, computer wins :("
+  
+    endGameResults.style.visibility = "visible";
     playAgainButton.addEventListener('click', resetGame)
 }
 
@@ -49,7 +48,7 @@ function resetGame() {
   computerScore.innerText = "0"
   comments.innerText = "Welcome! Pick your weapon!"
   rpsButtons.forEach(button => button.disabled = false)
-  endGameResults.hidden = true;
+  endGameResults.style.visibility = "hidden";
 }
 
 function game() {
@@ -61,7 +60,7 @@ function game() {
   // use switch
 
   if (roundResult == "tie") {
-    comments.innerText = "TIE!!!";
+    comments.innerText = "TIE!";
   } else if (roundResult == "player") {
     comments.innerText = `You Win! ${playerSelection} beats ${computerSelection}!`
     score.updatePlayer()
@@ -70,6 +69,6 @@ function game() {
     score.updateComp()
   }  
 
-if (score.checkForWinner(3)) endGame(score.checkForWinner(3))
+if (score.checkForWinner(3)) endGame(roundResult)
 }
 

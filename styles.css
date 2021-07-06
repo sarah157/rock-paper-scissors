@@ -1,37 +1,99 @@
+/* Colors */
+:root {
+  --lightBlue: #edf6f9;
+  --darkBlue: #83c5be;
+}
+
 *,
 *::after,
 *::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #edf6f9;
+  font-family: "Open Sans", sans-serif;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 60%;
-    height: 25rem;
-    margin: 15rem auto;
-    border: 3px black solid;
+  width: 580px;
+  height: 400px;
+}
+
+.header {
+  font-family: "Encode Sans SC", sans-serif;
+  margin: 3rem auto 5rem;
+  text-align: center;
+}
+
+.game-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 450px;
+  background-color: var(--darkBlue);
+  border-radius: 5%;
 }
 
 .score-count {
-    display: flex;
-    width: 40%;
-    justify-content:space-between;
-    align-items: space-between;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  align-items: space-between;
+  margin-bottom: 30px;
+  margin-left: 27px;
 }
 
 .score-count p {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .score-count span {
-    display: block;
-    font-size: 2rem;
+  display: block;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--lightBlue);
+}
+
+#rpsButtons button {
+  width: 100px;
+  padding: 15px 0;
+  margin: 1rem 0.5rem;
+  border-radius: 10%;
+  font-family: inherit;
+  background-color: lightcoral;
+  border: none;
+}
+
+#endGameResults {
+
+  display: flex; 
+  flex-direction: column;
+  height: 50px;
+  row-gap: 15px;
+  margin-top: 1.5rem;
+  align-items: center;
+  visibility: hidden;
+}
+
+#playAgainButton {
+  display: inline-block;
+  width: 100px;
+  padding: 10px 0;
+  margin: 0 0.5rem;
+  border-radius: 5%;
+  font-family: inherit;
+  background-color: lightgoldenrodyellow;
+  border: none;
 }
