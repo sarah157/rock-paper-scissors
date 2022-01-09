@@ -57,8 +57,6 @@ function game() {
 
   let roundResult = playRound(playerSelection, computerSelection);
 
-  // use switch
-
   if (roundResult == "tie") {
     comments.innerText = "TIE!";
   } else if (roundResult == "player") {
